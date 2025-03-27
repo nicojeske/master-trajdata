@@ -12,8 +12,8 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "License :: OSI Approved :: Apache Software License",
 ]
-name = "trajdata"
-version = "1.4.0"
+name = "trajdata-custom"
+version = "1.4.1"
 authors = [{ name = "Boris Ivanovic", email = "bivanovic@nvidia.com" }]
 description = "A unified interface to many trajectory forecasting datasets."
 readme = "README.md"
@@ -41,13 +41,13 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-#av2 = ["av2==0.2.1"]
-#dev = ["black", "isort", "pytest", "pytest-xdist", "twine", "build"]
-#interaction = ["lanelet2==1.2.1"]
+av2 = ["av2==0.2.1"]
+dev = ["black", "isort", "pytest", "pytest-xdist", "twine", "build"]
+interaction = ["lanelet2==1.2.1"]
 #lyft = ["l5kit==1.5.0"]
-#nusc = ["nuscenes-devkit==1.1.9"]
+nusc = ["nuscenes-devkit==1.1.9"]
 #waymo = ["tensorflow==2.11.0", "waymo-open-dataset-tf-2-11-0", "intervaltree"]
-#vod = ["vod-devkit==1.1.1"]
+vod = ["vod-devkit==1.1.1"]
 
 [project.urls]
 "Homepage" = "https://github.com/nvr-avg/trajdata"
