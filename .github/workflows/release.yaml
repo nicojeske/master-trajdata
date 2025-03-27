@@ -1,0 +1,53 @@
+name: Build and Release Wheel
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write # Required to create releases and tags
+
+jobs:
+  build-and-release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Add uv to PATH
+        run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Verify uv installation
+        run: uv --version
+
+      - name: Build wheel with uv
+        run: |
+          # Build only the wheel and place it in the standard 'dist' directory
+          uv build --wheel --out dist/
+      - name: Get package version
+        id: get_version
+        run: |
+          uv pip install toml # Install toml parser using uv
+          version=$(python -c "import toml; print(toml.load('pyproject.toml')['project']['version'])")
+          echo "version=${version}" >> $GITHUB_OUTPUT
+          echo "Detected version: ${version}"
+
+      - name: Create GitHub Release and Upload Wheel
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          name: Release v${{ steps.get_version.outputs.version }}
+          generate_release_notes: true
+          files: dist/*.whl # Upload all .whl files found in the dist directory
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
