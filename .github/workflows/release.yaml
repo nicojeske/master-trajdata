@@ -36,7 +36,7 @@ jobs:
         run: |
           uv venv
           uv pip install toml # Install toml parser using uv
-          version=$(python -c "import toml; print(toml.load('pyproject.toml')['project']['version'])")
+          version=$(uv run python -c "import toml; print(toml.load('pyproject.toml')['project']['version'])")
           echo "version=${version}" >> $GITHUB_OUTPUT
           echo "Detected version: ${version}"
 
