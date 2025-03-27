@@ -33,7 +33,7 @@ jobs:
       - name: Build wheel with uv
         run: |
           # Build only the wheel and place it in the standard 'dist' directory
-          uv build --wheel --out-dir dist/
+          uv build --wheel
       - name: Get package version
         id: get_version
         run: |
@@ -48,6 +48,6 @@ jobs:
           tag_name: v${{ steps.get_version.outputs.version }}
           name: Release v${{ steps.get_version.outputs.version }}
           generate_release_notes: true
-          files: dist/*.whl # Upload all .whl files found in the dist directory
+          files: ./dist/*.whl # Upload all .whl files found in the dist directory
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
