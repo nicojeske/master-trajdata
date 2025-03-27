@@ -16,24 +16,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
       - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
-
-      - name: Add uv to PATH
-        run: echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "0.6.10"
+          enable-cache: true
 
       - name: Verify uv installation
         run: uv --version
 
+      - name: Set up Python
+        run: uv python install
+
       - name: Build wheel with uv
-        run: |
-          # Build only the wheel and place it in the standard 'dist' directory
-          uv build --wheel
+        run: uv build
+
       - name: Get package version
         id: get_version
         run: |
