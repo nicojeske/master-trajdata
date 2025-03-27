@@ -22,6 +22,7 @@ WAYMO_DATASET_NAMES = [
     "training_20s",
     "validation",
     "validation_interactive",
+    "custom"
 ]
 
 TRAIN_SCENE_LENGTH = 91
@@ -67,7 +68,7 @@ class WaymoScenarios:
 
         self.name = dataset_name
         self.source_dir = source_dir
-        if dataset_name in ["training"]:
+        if dataset_name in ["training", "custom"]:
             self.scene_length = TRAIN_SCENE_LENGTH
         elif dataset_name in ["validation", "validation_interactive"]:
             self.scene_length = VAL_SCENE_LENGTH

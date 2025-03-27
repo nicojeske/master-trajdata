@@ -66,6 +66,11 @@ class WaymoDataset(RawDataset):
             dataset_parts = [("test",)]
             scene_split_map = defaultdict(partial(const_lambda, const_val="test"))
 
+        elif env_name == "waymo_custom":
+            dataset_parts = [("custom",)]
+            scene_split_map = defaultdict(partial(const_lambda, const_val="custom"))
+
+
         return EnvMetadata(
             name=env_name,
             data_dir=data_dir,
@@ -84,6 +89,8 @@ class WaymoDataset(RawDataset):
             dataset_name = "validation"
         elif self.name == "waymo_test":
             dataset_name = "testing"
+        elif self.name == "waymo_custom":
+            dataset_name = "custom"
         self.dataset_obj = WaymoScenarios(
             dataset_name=dataset_name, source_dir=self.metadata.data_dir
         )
