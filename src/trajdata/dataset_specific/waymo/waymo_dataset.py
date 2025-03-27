@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import tensorflow as tf
 import tqdm
-from waymo_open_dataset.protos.scenario_pb2 import Scenario
+from trajdata.dataset_specific.waymo.protos.out.scenario_pb2 import Scenario
 
 from trajdata.caching import EnvCache, SceneCache
 from trajdata.data_structures import (

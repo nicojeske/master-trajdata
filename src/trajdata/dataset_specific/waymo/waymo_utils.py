@@ -8,8 +8,8 @@ import pandas as pd
 import tensorflow as tf
 from intervaltree import Interval, IntervalTree
 from tqdm import tqdm
-from waymo_open_dataset.protos import map_pb2 as waymo_map_pb2
-from waymo_open_dataset.protos import scenario_pb2
+from trajdata.dataset_specific.waymo.protos.out import map_pb2 as waymo_map_pb2
+from trajdata.dataset_specific.waymo.protos.out import scenario_pb2
 
 from trajdata.maps import TrafficLightStatus, VectorMap
 from trajdata.maps.vec_map_elements import PedCrosswalk, Polyline, RoadLane
