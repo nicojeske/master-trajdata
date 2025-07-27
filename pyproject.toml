@@ -38,6 +38,7 @@ dependencies = [
     "tensorflow==2.19.0",
     "intervaltree>=3.1.0",
     "selenium>=4.29.0",
+    "notebook>=7.3.3",
 ]
 
 [project.optional-dependencies]

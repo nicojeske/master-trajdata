@@ -10,13 +10,19 @@ from trajdata.visualization.interactive_animation import (
 )
 from trajdata.visualization.interactive_vis import plot_agent_batch_interactive
 from trajdata.visualization.vis import plot_agent_batch
-
+from pathlib import Path
 
 def main():
+
+
+    waymo_path = Path(r"K:\Master\Waymo")
+    cache_path = Path(r"K:\Master\.trajdata_cache")
+
     dataset = UnifiedDataset(
-        desired_data=["nusc_mini"],
+        desired_data=["waymo_custom"],
         centric="agent",
         desired_dt=0.1,
+        verbose=True,
         # history_sec=(3.2, 3.2),
         # future_sec=(4.8, 4.8),
         only_predict=[AgentType.VEHICLE],
@@ -31,11 +37,9 @@ def main():
             "offset_frac_xy": (-0.5, 0.0),
         },
         num_workers=4,
-        verbose=True,
+        cache_location=cache_path,
         data_dirs={  # Remember to change this to match your filesystem!
-            "nusc_mini": "~/datasets/nuScenes",
-            "lyft_sample": "~/datasets/lyft/scenes/sample.zarr",
-            "nuplan_mini": "~/datasets/nuplan/dataset/nuplan-v1.1",
+            "waymo_custom": waymo_path,
         },
     )
 
